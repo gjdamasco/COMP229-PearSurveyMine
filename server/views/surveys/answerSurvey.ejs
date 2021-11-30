@@ -1,0 +1,37 @@
+<form method="POST">
+	<ul class="question-display">
+		<% for (let i=0; i < survey.MCQuestions.length; i++ ) { %>
+		<li>
+			<div class="question-wrapper">
+				<div class="question-number"><%= questionNumber %></div>
+				<div class="single-question">
+				
+					<div class="question-row">
+						<div class="question-radio-wrapper">
+							<input
+								class="question-radio-choice"
+								id="question<%= i %>_answer_<%= k %>"
+								name="question<%= i %>"
+								value="<%= currentChoice %>"
+								type="radio"
+								required
+							/>
+						</div>
+						<div class="question-radio-label-wrapper">
+							<label
+								class="question-radio-label"
+								for="question<%= i %>_answer_<%= k %>"
+							>
+								<%= currentChoice %>
+							</label>
+						</div>
+					</div>
+					
+			</div>
+		</li>
+		<% } %>
+	</ul>
+	<div class="button-center">
+		<button class="btn btn-primary" type="submit">Submit Survey</button>
+	</div>
+</form>

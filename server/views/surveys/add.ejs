@@ -1,0 +1,153 @@
+<% include ../partials/header.ejs %>
+
+    <!-- MAIN CONTENT -->
+    <div class="container">
+      <div class="row">
+        <divcol-md-6 >
+          <h1><%= title %></h1>
+            <form class="form" method="post" id="SurveyForm">
+                <div class="form-group">
+                <ul class="list-group list-group-flush">
+       
+       
+        <li class="list-group-item">
+          <label for="active">Choose active:</label>
+          <select name="active" id="active">
+            <option value="true">yes</option>
+            <option value="false">no</option>
+          </select>
+        </li>      
+      </ul>
+       
+                  <label for author > Author </label> 
+                    <input type="text" class="form-control" name="author" id="author" required> 
+                  <label> Title</label>
+                    <input type="text" class="form-control" name="title" id="title" required> 
+                    <br>
+                    <h3>Questions: </h3>
+            <div class=" col-md-12">                         
+             <table id="SurveyTable" class="table table-bordered table-striped table-hover">
+                </table>
+                <button type="button" id="tf" class="btn btn-secondary" onclick= "addTF()"><i class="fas fa-edit"></i>Add T/F Question</button>
+                <button type="button" id="mc" class="btn btn-secondary" onclick= "addMC()"><i class="fas fa-edit"></i>Add MC Question</button>
+              <br>
+              <br>
+              <button type="submit" class="btn btn-primary">Submit</button>
+              <a href="/surveys" class="btn btn-warning"><i class="fa fa-undo"></i> Cancel</a>
+              <br>
+                <br>
+                <br>
+                <br>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // let question = [];
+    function addMC(){
+    let table = document.getElementById("SurveyTable");
+    let currentIndex = table.rows.length;
+    let currentRow = table.insertRow(-1);
+
+    let question = document.createElement("input");
+    question.setAttribute("name", "questionMC");
+    question.setAttribute("placeholder", "Write your question");
+    let option = document.createElement("input");
+    option.setAttribute("name", "questionMC")
+    option.setAttribute("placeholder", "Write option 1");
+    // option.setAttribute("type", "radio")
+    let option2 = document.createElement("input");
+    option2.setAttribute("name", "questionMC")
+    option2.setAttribute("placeholder", "Write option 2")
+    // option2.setAttribute("type", "radio")
+    let option3 = document.createElement("input");
+    option3.setAttribute("name", "questionMC");
+    option3.setAttribute("placeholder", "Write option 3");
+    // option3.setAttribute("type", "radio");
+    let option4 = document.createElement("input");
+    option4.setAttribute("name", "questionMC");
+    option4.setAttribute("placeholder", "Write option 4");
+    let hiddenArray = document.createElement("input");
+    hiddenArray.setAttribute("name", "questionMC");
+    hiddenArray.setAttribute("hidden", "hidden");
+    let removeQuestion= document.createElement("button");
+    removeQuestion.setAttribute("class", "btn btn-danger");
+    removeQuestion.setAttribute("type", "button")
+    removeQuestion.textContent = "Delete";
+    removeQuestion.addEventListener("click", DeleteQuestion, false);
+
+       
+
+    let currentCell = currentRow.insertCell(-1);
+    currentCell.appendChild(question);
+    currentCell = currentRow.insertCell(-1);
+    currentCell.appendChild(option);
+    currentCell = currentRow.insertCell(-1);
+    currentCell.appendChild(option2);
+    currentCell = currentRow.insertCell(-1);
+    currentCell.appendChild(option3);
+    currentCell = currentRow.insertCell(-1);
+    currentCell.appendChild(option4);
+    currentCell = currentRow.insertCell(-1);
+    currentCell.appendChild(removeQuestion);
+    currentCell = currentRow.insertCell(-1);
+    currentCell.appendChild(hiddenArray);
+
+    function DeleteQuestion(){
+      var td = event.target.parentNode; 
+      var tr = td.parentNode; 
+      tr.parentNode.removeChild(tr);
+    }
+
+}
+function addTF(){
+    let table = document.getElementById("SurveyTable");
+    let currentIndex = table.rows.length;
+    let currentRow = table.insertRow(-1);
+
+    let question = document.createElement("input");
+    question.setAttribute("name", "questionTF");
+    question.setAttribute("placeholder", "Write your question");
+    let option = document.createElement("input");
+    option.setAttribute("name", "questionTF")
+    option.setAttribute("value", "True")
+    option.setAttribute("readonly", "readonly");;
+    let option2 = document.createElement("input");
+    option2.setAttribute("name", "questionTF")
+    option2.setAttribute("value", "False")
+    option2.setAttribute("readonly", "readonly");;
+    let option3 = document.createElement("label");
+    let hiddenArray = document.createElement("input");
+    hiddenArray.setAttribute("name", "questionTF");
+    hiddenArray.setAttribute("hidden", "hidden");
+    let removeQuestion= document.createElement("button");
+    removeQuestion.setAttribute("class", "btn btn-danger");
+    removeQuestion.setAttribute("type", "button")
+    removeQuestion.textContent = "Delete";
+    removeQuestion.addEventListener("click", DeleteQuestion, false);
+
+    let currentCell = currentRow.insertCell(-1);
+    currentCell.appendChild(question);
+    currentCell = currentRow.insertCell(-1);
+    currentCell.appendChild(option);
+    currentCell = currentRow.insertCell(-1);
+    currentCell.appendChild(option2);
+    currentCell = currentRow.insertCell(-1);
+    currentCell.appendChild(option3);
+    currentCell = currentRow.insertCell(-1);
+    currentCell.appendChild(hiddenArray);
+    currentCell = currentRow.insertCell(-1);
+    currentCell.appendChild(removeQuestion);
+
+    function DeleteQuestion(){
+      var td = event.target.parentNode; 
+      var tr = td.parentNode; 
+      tr.parentNode.removeChild(tr);
+    }
+    
+}
+
+    </script>
+<% include ../partials/footer.ejs %>
